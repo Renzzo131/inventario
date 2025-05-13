@@ -64,17 +64,18 @@ if ($tipo == "registrar") {
                 if ($arr_Usuario) {
                     $arr_Respuesta = array('status' => false, 'mensaje' => 'Registro Fallido, Usuario ya se encuentra registrado');
                 } else {
-                    // ✅ GENERAR CONTRASEÑA Y HASHEAR
-                    $password = $objAdmin->generar_llave(10);
-                    $pass_secure = password_hash($password, PASSWORD_DEFAULT);
+                   // ✅ GENERAR CONTRASEÑA Y HASHEAR
+$password = $objAdmin->generar_llave(10);
+$pass_secure = password_hash($password, PASSWORD_ARGON2ID);
 
-                    // ✅ REGISTRAR USUARIO
-                    $id_usuario = $objUsuario->registrarUsuario($dni, $apellidos_nombres, $correo, $telefono, $pass_secure);
-                    if ($id_usuario > 0) {
-                        $arr_Respuesta = array('status' => true, 'mensaje' => 'Registro Exitoso. Contraseña inicial: ' . $password);
-                    } else {
-                        $arr_Respuesta = array('status' => false, 'mensaje' => 'Error al registrar usuario');
-                    }
+// ✅ REGISTRAR USUARIO
+$id_usuario = $objUsuario->registrarUsuario($dni, $apellidos_nombres, $correo, $telefono, $pass_secure);
+if ($id_usuario > 0) {
+    $arr_Respuesta = array('status' => true, 'mensaje' => 'Registro Exitoso. Contraseña inicial: ' . $password);
+} else {
+    $arr_Respuesta = array('status' => false, 'mensaje' => 'Error al registrar usuario');
+}
+
                 }
             }
         }
