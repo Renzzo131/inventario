@@ -29,10 +29,19 @@
                         <div class="col-9">
                             <input type="text" class="form-control" id="telefono" name="telefono">
                         </div>
-                    </div>         
+                    </div>
+
+                    <!-- Nuevo campo: Contraseña -->
+                    <div class="form-group row mb-4">
+                        <label for="password" class="col-3 col-form-label">Contraseña</label>
+                        <div class="col-9">
+                            <input type="password" class="form-control" id="password" name="password">
+                        </div>
+                    </div>
+
                     <div class="form-group mb-0 justify-content-end row text-center">
                         <div class="col-12">
-                        <a href="<?php echo BASE_URL;?>usuarios" class="btn btn-light waves-effect waves-light">Regresar</a>
+                            <a href="<?php echo BASE_URL;?>usuarios" class="btn btn-light waves-effect waves-light">Regresar</a>
                             <button type="button" class="btn btn-success waves-effect waves-light" onclick="registrar_usuario();">Registrar</button>
                         </div>
                     </div>
@@ -42,4 +51,3 @@
     </div>
 </div>
 <script src="<?php echo BASE_URL; ?>src/view/js/functions_usuario.js"></script>
-<!-- end page title -->
