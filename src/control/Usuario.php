@@ -64,15 +64,18 @@ if ($tipo == "registrar") {
                 if ($arr_Usuario) {
                     $arr_Respuesta = array('status' => false, 'mensaje' => 'Registro Fallido, Usuario ya se encuentra registrado');
                 } else {
-// ✅ GENERAR CONTRASEÑA Y HASHEAR
-$password = $objAdmin->generar_llave(10);
-$options = ['cost' => 10];  // opcional, 10 es el valor por defecto
+// ✅ OBTENER CONTRASEÑA DESDE EL FORMULARIO
+$password = $_POST['password'];  // Asegúrate de validar y sanitizar si es necesario
+
+// ✅ HASHEAR LA CONTRASEÑA CON BCRYPT
+$options = ['cost' => 10];  // 10 es el valor por defecto en bcrypt
 $pass_secure = password_hash($password, PASSWORD_BCRYPT, $options);
 
 // ✅ REGISTRAR USUARIO
 $id_usuario = $objUsuario->registrarUsuario($dni, $apellidos_nombres, $correo, $telefono, $pass_secure);
+
 if ($id_usuario > 0) {
-    $arr_Respuesta = array('status' => true, 'mensaje' => 'Registro Exitoso. Contraseña inicial: ' . $password);
+    $arr_Respuesta = array('status' => true, 'mensaje' => 'Registro Exitoso.');
 } else {
     $arr_Respuesta = array('status' => false, 'mensaje' => 'Error al registrar usuario');
 }
