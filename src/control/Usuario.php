@@ -4,7 +4,13 @@ require_once('../model/admin-sesionModel.php');
 require_once('../model/admin-usuarioModel.php');
 require_once('../model/adminModel.php');
 
+require '../../vendor/autoload.php';
+
 $tipo = $_GET['tipo'];
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
 $objSesion = new SessionModel();
 $objUsuario = new UsuarioModel();
@@ -140,6 +146,58 @@ if ($tipo = "send_email_password") {
     if ($objSesion->verificar_sesion_si_activa($id_sesion, $token)) {
         $datos_sesion = $objSesion -> buscarSesionLoginById($id_sesion);
         $datos_usuario = $objUsuario->buscarUsuarioById($datos_sesion->id_usuario);
-        print_r($datos_usuario);
+        $llave = $objAdmin->generar_llave(30);
+        $token = password_hash($llave, PASSWORD_DEFAULT);
+        $update = $objUsuario->updateResetPassword($datos_sesion->id_usuario, $llave, 1);
+        if ($update) {
+            //Import PHPMailer classes into the global namespace
+//These must be at the top of your script, not inside a function
+
+
+//Load Composer's autoloader (created by composer, not included with PHPMailer)
+
+
+//Create an instance; passing `true` enables exceptions
+$mail = new PHPMailer(true);
+
+try {
+    //Server settings
+    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+    $mail->isSMTP();                                            //Send using SMTP
+    $mail->Host       = 'mail.programacion2024.com';                     //Set the SMTP server to send through
+    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+    $mail->Username   = 'renzo_1304@programacion2024.com';                     //SMTP username
+    $mail->Password   = 'mqaaGWIP1Ci%';                               //SMTP password
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+    //Recipients
+    $mail->setFrom('renzo_1304@programacion2024.com', 'Cambio de contraseña - TB');
+    $mail->addAddress($datos_usuario->correo, $datos_usuario->nombres_apellidos);     //Add a recipient
+    /*$mail->addAddress('ellen@example.com');               //Name is optional
+    $mail->addReplyTo('info@example.com', 'Information');
+    $mail->addCC('cc@example.com');
+    $mail->addBCC('bcc@example.com');
+
+    //Attachments
+    $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+    $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+
+    */
+    //Content
+    $mail->isHTML(true);                                  //Set email format to HTML
+    $mail->Subject = 'Here is the subject';
+    $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+    $mail->send();
+    echo 'Message has been sent';
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+}
+        }else{
+            echo 'falló al actualizar';
+        }
+        //print_r($token);
     }
 }
