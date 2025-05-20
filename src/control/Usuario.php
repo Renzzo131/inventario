@@ -64,14 +64,14 @@ if ($tipo == "registrar") {
                 if ($arr_Usuario) {
                     $arr_Respuesta = array('status' => false, 'mensaje' => 'Registro Fallido, Usuario ya se encuentra registrado');
                 } else {
-// ✅ OBTENER CONTRASEÑA DESDE EL FORMULARIO
+//  OBTENER CONTRASEÑA DESDE EL FORMULARIO
 $password = $_POST['password'];  // Asegúrate de validar y sanitizar si es necesario
 
-// ✅ HASHEAR LA CONTRASEÑA CON BCRYPT
+//  HASHEAR LA CONTRASEÑA CON BCRYPT
 $options = ['cost' => 10];  // 10 es el valor por defecto en bcrypt
 $pass_secure = password_hash($password, PASSWORD_BCRYPT, $options);
 
-// ✅ REGISTRAR USUARIO
+//  REGISTRAR USUARIO
 $id_usuario = $objUsuario->registrarUsuario($dni, $apellidos_nombres, $correo, $telefono, $pass_secure);
 
 if ($id_usuario > 0) {
@@ -139,6 +139,7 @@ if ($tipo = "send_email_password") {
     $arr_Respuesta = array('status' => false, 'msg' => 'Error_Sesion');
     if ($objSesion->verificar_sesion_si_activa($id_sesion, $token)) {
         $datos_sesion = $objSesion -> buscarSesionLoginById($id_sesion);
-        print_r($datos_sesion);
+        $datos_usuario = $objUsuario->buscarUsuarioById($datos_sesion->id_usuario);
+        print_r($datos_usuario);
     }
 }
