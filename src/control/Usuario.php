@@ -310,6 +310,7 @@ try {
     </div>
     <div class="color-bar"></div>
     <div class="content">
+    <center><img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fiestphuanta.edu.pe%2F&psig=AOvVaw1EzQjwI9r7NmJ4leCnZ6WS&ust=1749049209651000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKCL4ZjC1Y0DFQAAAAAdAAAAABAE"></center>
       <h1>Hola [Nombre del cliente],</h1>
       <p>
         Te saludamos cordialmente desde el Instituto de Educación Superior Tecnológico Público Huanta. Hemos recibido una solicitud para cambiar la contraseña de tu cuenta en nuestro sistema académico.
