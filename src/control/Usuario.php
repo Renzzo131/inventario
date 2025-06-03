@@ -208,27 +208,26 @@ try {
       font-family: Arial, sans-serif;
       color: #333333;
       border: 1px solid #dddddd;
-      border-radius: 8px;
+      border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
     .header {
       background-color: #03588C;
       color: white;
-      padding: 25px 20px;
+      padding: 20px;
       text-align: center;
     }
     .header h2 {
-      margin: 0 0 5px 0;
-      font-size: 20px;
+      margin: 0 0 8px 0;
+      font-size: 18px;
     }
     .header-subtitle {
       margin: 0;
-      font-size: 14px;
+      font-size: 13px;
       opacity: 0.9;
     }
-    .accent-line {
-      height: 4px;
+    .color-bar {
+      height: 5px;
       background: linear-gradient(90deg, #9FD923 0%, #F2E205 50%, #8DE0F2 100%);
     }
     .content {
@@ -243,14 +242,15 @@ try {
       font-size: 16px;
       line-height: 1.5;
     }
-    .security-notice {
+    .alert-box {
       background-color: #F2E205;
-      border-left: 4px solid #9FD923;
-      padding: 12px 15px;
+      border: 2px solid #9FD923;
+      padding: 15px;
       margin: 20px 0;
-      border-radius: 4px;
+      border-radius: 8px;
+      text-align: center;
     }
-    .security-notice p {
+    .alert-box p {
       margin: 0;
       font-size: 14px;
       font-weight: bold;
@@ -263,26 +263,26 @@ try {
       padding: 15px 30px;
       margin: 20px 0;
       text-decoration: none;
-      border-radius: 25px;
+      border-radius: 30px;
       font-weight: bold;
       font-size: 16px;
-      transition: all 0.3s ease;
-      box-shadow: 0 3px 8px rgba(3,88,140,0.3);
+      box-shadow: 0 4px 8px rgba(3, 88, 140, 0.3);
+      transition: all 0.3s;
     }
     .button:hover {
       background-color: #9FD923;
       color: #333333 !important;
-      transform: translateY(-2px);
-      box-shadow: 0 5px 12px rgba(159,217,35,0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(159, 217, 35, 0.4);
     }
-    .highlight-text {
+    .highlight {
       color: #03588C;
       font-weight: bold;
     }
     .footer {
       background-color: #03588C;
       text-align: center;
-      padding: 20px 15px;
+      padding: 15px;
       font-size: 12px;
       color: #ffffff;
     }
@@ -307,28 +307,28 @@ try {
   <div class="container">
     <div class="header">
       <h2>Instituto de Educación Superior Tecnológico Público Huanta</h2>
-      <p class="header-subtitle">Excelencia Educativa • Innovación Tecnológica</p>
+      <p class="header-subtitle">Excelencia Educativa - Innovación Tecnológica</p>
     </div>
-    <div class="accent-line"></div>
+    <div class="color-bar"></div>
     <div class="content">
       <h1>Hola [Nombre del cliente],</h1>
       <p>
         Te saludamos cordialmente desde el Instituto de Educación Superior Tecnológico Público Huanta. Hemos recibido una solicitud para cambiar la contraseña de tu cuenta en nuestro sistema académico.
       </p>
-      <div class="security-notice">
-        <p>🔐 Por tu seguridad, este enlace expirará en 24 horas</p>
+      <div class="alert-box">
+        <p>🔒 Por tu seguridad, este enlace expirará en 24 horas</p>
       </div>
       <p>
-        Si solicitaste este cambio, haz clic en el botón de abajo para crear tu nueva contraseña. Si no realizaste esta solicitud, puedes ignorar este correo.
+        Si solicitaste este cambio, haz clic en el botón de abajo para crear tu nueva contraseña. Si no realizaste esta solicitud, puedes ignorar este correo de forma segura.
       </p>
       <center>
-        <a href="https://www.tusitio.com/cambiar-password" class="button">Cambiar Contraseña</a>
+        <a href="https://www.tusitio.com/promocion" class="button">Cambiar Contraseña</a>
       </center>
-      <p class="highlight-text">Gracias por confiar en nosotros para tu formación profesional.</p>
+      <p class="highlight">Gracias por confiar en nosotros para tu formación profesional.</p>
     </div>
     <div class="footer">
       © 2025 Instituto de Educación Superior Tecnológico Público Huanta. Todos los derechos reservados.<br>
-      Ayacucho, Perú • <a href="mailto:soporte@iestphuanta.edu.pe">soporte@iestphuanta.edu.pe</a><br>
+      Ayacucho, Perú | <a href="mailto:soporte@iestphuanta.edu.pe">soporte@iestphuanta.edu.pe</a><br>
       <a href="https://www.tusitio.com/desuscribirse">Cancelar suscripción</a>
     </div>
   </div>
