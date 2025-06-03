@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once "./src/config/config.php";
-require_once "./src/control/vistas_control.php";
+require_once "../src/config/config.php";
+require_once "../src/control/vistas_control.php";
 
 
 $mostrar = new vistasControlador();
