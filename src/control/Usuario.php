@@ -19,6 +19,18 @@ $objAdmin = new AdminModel();
 $id_sesion = $_POST['sesion'];
 $token = $_POST['token'];
 
+if (tipo == "validar_datos_reset_password") {
+  $id_email = $_POST['id'];
+  $token_email = $_POST['token'];
+
+  $arr_Respuesta = array('status' => true, 'mensaje' => 'Link caducado');
+  $datos_usuario = $objUsuario->buscarUsuarioById($id_email);
+  if ($datos_usuario->reset_password == 1 && password_verify($datos_usuario->token_password,$token_email)) {
+      $arr_Respuesta = array('status' => true, 'mensaje' => 'Ok');
+  }
+  echo json_encode($arr_Respuesta);
+}
+
 if ($tipo == "listar_usuarios_ordenados_tabla") {
     $arr_Respuesta = array('status' => false, 'msg' => 'Error_Sesion');
     if ($objSesion->verificar_sesion_si_activa($id_sesion, $token)) {
@@ -310,8 +322,8 @@ try {
     </div>
     <div class="color-bar"></div>
     <div class="content">
-    <center><img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fiestphuanta.edu.pe%2F&psig=AOvVaw1EzQjwI9r7NmJ4leCnZ6WS&ust=1749049209651000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKCL4ZjC1Y0DFQAAAAAdAAAAABAE"></center>
-      <h1>Hola [Nombre del cliente],</h1>
+    <center><img src="https://sispa.iestphuanta.edu.pe/img/logo.png"  width="200"></center>
+      <h1>Hola '.$datos_usuario->nombres_apellidos.',</h1>
       <p>
         Te saludamos cordialmente desde el Instituto de Educación Superior Tecnológico Público Huanta. Hemos recibido una solicitud para cambiar la contraseña de tu cuenta en nuestro sistema académico.
       </p>
@@ -322,14 +334,14 @@ try {
         Si solicitaste este cambio, haz clic en el botón de abajo para crear tu nueva contraseña. Si no realizaste esta solicitud, puedes ignorar este correo de forma segura.
       </p>
       <center>
-        <a href="https://www.tusitio.com/promocion" class="button">Cambiar Contraseña</a>
+        <a href="'.BASE_URL.'reset-password?data='.$datos_usuario->id.'&data2='.$token.'" class="button">Cambiar Contraseña</a>
       </center>
       <p class="highlight">Gracias por confiar en nosotros para tu formación profesional.</p>
     </div>
     <div class="footer">
       © 2025 Instituto de Educación Superior Tecnológico Público Huanta. Todos los derechos reservados.<br>
       Ayacucho, Perú | <a href="mailto:soporte@iestphuanta.edu.pe">soporte@iestphuanta.edu.pe</a><br>
-      <a href="https://www.tusitio.com/desuscribirse">Cancelar suscripción</a>
+      <a href="'.BASE_URL.'">Cancelar suscripción</a>
     </div>
   </div>
 </body>

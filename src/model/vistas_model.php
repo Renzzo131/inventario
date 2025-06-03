@@ -13,10 +13,12 @@ class vistaModelo
             } else {
                 $contenido = "404";
             }
-        } elseif ($vista == "inicio" || $vista == "index") {
+        } elseif ($vista == "inicio" || $vista == "index" ) {
             $contenido = "inicio.php";
         } elseif ($vista == "login") {
             $contenido = "login";
+        } elseif ($vista == "reset-password" ) {
+            $contenido = "reset-password";
         } else {
             $contenido = "404";
         }
