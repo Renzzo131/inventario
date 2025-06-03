@@ -70,10 +70,9 @@ if ($tipo == "registrar") {
                 if ($arr_Usuario) {
                     $arr_Respuesta = array('status' => false, 'mensaje' => 'Registro Fallido, Usuario ya se encuentra registrado');
                 } else {
-//  OBTENER CONTRASEÑA DESDE EL FORMULARIO
-$password = $_POST['password'];  // Asegúrate de validar y sanitizar si es necesario
 
-//  HASHEAR LA CONTRASEÑA CON BCRYPT
+$password = $_POST['password'];
+
 $pass_secure = password_hash($password, PASSWORD_DEFAULT);
 
 

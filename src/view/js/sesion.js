@@ -23,6 +23,8 @@ async function iniciar_sesion() {
         });
         json = await respuesta.json();
         if (json.status) {
+            window.session_session = json.contenido['sesion_id'];
+    window.token_token = json.contenido['sesion_token'];
             //swal("Iniciar Sesion", json.mensaje, "success");
             const formData = new FormData();
             formData.append('session', json.contenido['sesion_id']);
