@@ -189,7 +189,7 @@ try {
     $mail->CharSet = 'UTF-8';                           //Set email format to HTML
     $mail->Subject = 'Cambio de contraseña papu - Sistema de virus';
     $mail->Body    = '
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -199,7 +199,7 @@ try {
     body {
       margin: 0;
       padding: 0;
-      background-color: #f4f4f4;
+      background-color: #8DE0F2;
     }
     .container {
       max-width: 600px;
@@ -208,12 +208,28 @@ try {
       font-family: Arial, sans-serif;
       color: #333333;
       border: 1px solid #dddddd;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
     .header {
-      background-color: #004aad;
+      background-color: #03588C;
       color: white;
-      padding: 20px;
+      padding: 25px 20px;
       text-align: center;
+    }
+    .header h2 {
+      margin: 0 0 5px 0;
+      font-size: 20px;
+    }
+    .header-subtitle {
+      margin: 0;
+      font-size: 14px;
+      opacity: 0.9;
+    }
+    .accent-line {
+      height: 4px;
+      background: linear-gradient(90deg, #9FD923 0%, #F2E205 50%, #8DE0F2 100%);
     }
     .content {
       padding: 30px;
@@ -221,26 +237,61 @@ try {
     .content h1 {
       font-size: 22px;
       margin-bottom: 20px;
+      color: #03588C;
     }
     .content p {
       font-size: 16px;
       line-height: 1.5;
     }
-    .button {
-      display: inline-block;
-      background-color: #004aad;
-      color: #ffffff !important;
-      padding: 12px 25px;
+    .security-notice {
+      background-color: #F2E205;
+      border-left: 4px solid #9FD923;
+      padding: 12px 15px;
       margin: 20px 0;
-      text-decoration: none;
       border-radius: 4px;
     }
+    .security-notice p {
+      margin: 0;
+      font-size: 14px;
+      font-weight: bold;
+      color: #333;
+    }
+    .button {
+      display: inline-block;
+      background-color: #03588C;
+      color: #ffffff !important;
+      padding: 15px 30px;
+      margin: 20px 0;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: bold;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 8px rgba(3,88,140,0.3);
+    }
+    .button:hover {
+      background-color: #9FD923;
+      color: #333333 !important;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 12px rgba(159,217,35,0.4);
+    }
+    .highlight-text {
+      color: #03588C;
+      font-weight: bold;
+    }
     .footer {
-      background-color: #eeeeee;
+      background-color: #03588C;
       text-align: center;
-      padding: 15px;
+      padding: 20px 15px;
       font-size: 12px;
-      color: #666666;
+      color: #ffffff;
+    }
+    .footer a {
+      color: #8DE0F2;
+      text-decoration: none;
+    }
+    .footer a:hover {
+      color: #9FD923;
     }
     @media screen and (max-width: 600px) {
       .content, .header, .footer {
@@ -255,21 +306,29 @@ try {
 <body>
   <div class="container">
     <div class="header">
-      <h2>Nombre de tu empresa</h2>
+      <h2>Instituto de Educación Superior Tecnológico Público Huanta</h2>
+      <p class="header-subtitle">Excelencia Educativa • Innovación Tecnológica</p>
     </div>
+    <div class="accent-line"></div>
     <div class="content">
       <h1>Hola [Nombre del cliente],</h1>
       <p>
-        Te saludamos cordialmente. Queremos informarte sobre nuestras últimas novedades y promociones exclusivas para ti.
+        Te saludamos cordialmente desde el Instituto de Educación Superior Tecnológico Público Huanta. Hemos recibido una solicitud para cambiar la contraseña de tu cuenta en nuestro sistema académico.
       </p>
+      <div class="security-notice">
+        <p>🔐 Por tu seguridad, este enlace expirará en 24 horas</p>
+      </div>
       <p>
-        ¡No te pierdas nuestras ofertas especiales por tiempo limitado!
+        Si solicitaste este cambio, haz clic en el botón de abajo para crear tu nueva contraseña. Si no realizaste esta solicitud, puedes ignorar este correo.
       </p>
-      <a href="https://www.tusitio.com/promocion" class="button">Ver más</a>
-      <p>Gracias por confiar en nosotros.</p>
+      <center>
+        <a href="https://www.tusitio.com/cambiar-password" class="button">Cambiar Contraseña</a>
+      </center>
+      <p class="highlight-text">Gracias por confiar en nosotros para tu formación profesional.</p>
     </div>
     <div class="footer">
-      © 2025 Nombre de tu empresa. Todos los derechos reservados.<br>
+      © 2025 Instituto de Educación Superior Tecnológico Público Huanta. Todos los derechos reservados.<br>
+      Ayacucho, Perú • <a href="mailto:soporte@iestphuanta.edu.pe">soporte@iestphuanta.edu.pe</a><br>
       <a href="https://www.tusitio.com/desuscribirse">Cancelar suscripción</a>
     </div>
   </div>
