@@ -74,8 +74,8 @@ if ($tipo == "registrar") {
 $password = $_POST['password'];  // Asegúrate de validar y sanitizar si es necesario
 
 //  HASHEAR LA CONTRASEÑA CON BCRYPT
-$options = ['cost' => 10];  // 10 es el valor por defecto en bcrypt
-$pass_secure = password_hash($password, PASSWORD_BCRYPT, $options);
+$pass_secure = password_hash($password, PASSWORD_DEFAULT);
+
 
 //  REGISTRAR USUARIO
 $id_usuario = $objUsuario->registrarUsuario($dni, $apellidos_nombres, $correo, $telefono, $pass_secure);
