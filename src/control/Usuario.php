@@ -19,11 +19,11 @@ $objAdmin = new AdminModel();
 $id_sesion = $_POST['sesion'];
 $token = $_POST['token'];
 
-if (tipo == "validar_datos_reset_password") {
+if ($tipo == "validar_datos_reset_password") {
   $id_email = $_POST['id'];
   $token_email = $_POST['token'];
 
-  $arr_Respuesta = array('status' => true, 'mensaje' => 'Link caducado');
+  $arr_Respuesta = array('status' => false, 'mensaje' => 'Link caducado');
   $datos_usuario = $objUsuario->buscarUsuarioById($id_email);
   if ($datos_usuario->reset_password == 1 && password_verify($datos_usuario->token_password,$token_email)) {
       $arr_Respuesta = array('status' => true, 'mensaje' => 'Ok');
@@ -334,7 +334,7 @@ try {
         Si solicitaste este cambio, haz clic en el botón de abajo para crear tu nueva contraseña. Si no realizaste esta solicitud, puedes ignorar este correo de forma segura.
       </p>
       <center>
-        <a href="'.BASE_URL.'reset-password?data='.$datos_usuario->id.'&data2='.$token.'" class="button">Cambiar Contraseña</a>
+        <a href="'.BASE_URL.'reset-password/?data='.$datos_usuario->id.'&data2='.urlencode($token).'" class="button">Cambiar Contraseña</a>
       </center>
       <p class="highlight">Gracias por confiar en nosotros para tu formación profesional.</p>
     </div>
