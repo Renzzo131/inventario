@@ -377,3 +377,209 @@ if ($tipo == "nuevo_password") {
 
   echo json_encode($arr_Respuesta);
 }
+
+
+
+if ($tipo == "generar_nuevo_link_password") {
+  $id = $_POST['id'];
+  $arr_Respuesta = ['status' => false, 'msg' => 'No se pudo generar enlace'];
+
+  $datos_usuario = $objUsuario->buscarUsuarioById($id);
+  if ($datos_usuario) {
+    $llave = $objAdmin->generar_llave(30);
+    $token_hash = password_hash($llave, PASSWORD_DEFAULT);
+    $update = $objUsuario->updateResetPassword($id, $llave, 1);
+
+    if ($update) {
+      // Enviar correo (reutiliza tu código de PHPMailer)
+      // (Puedes copiar-pegar tu bloque de $mail y solo cambia el mensaje)
+      $mail = new PHPMailer(true);
+
+      try {
+        //Server settings
+        $mail->SMTPDebug = 0;                      //Enable verbose debug output
+        $mail->isSMTP();                                            //Send using SMTP
+        $mail->Host       = 'mail.programacion2024.com';                     //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = 'renzo_1304@programacion2024.com';                     //SMTP username
+        $mail->Password   = 'mqaaGWIP1Ci%';                               //SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+        //Recipients
+        $mail->setFrom('renzo_1304@programacion2024.com', 'Cambio de contraseña - TB');
+        $mail->addAddress($datos_usuario->correo, $datos_usuario->nombres_apellidos);     //Add a recipient
+        /*$mail->addAddress('ellen@example.com');               //Name is optional
+    $mail->addReplyTo('info@example.com', 'Information');
+    $mail->addCC('cc@example.com');
+    $mail->addBCC('bcc@example.com');
+
+    //Attachments
+    $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+    $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+
+    */
+        //Content
+        $mail->isHTML(true);
+        $mail->CharSet = 'UTF-8';                           //Set email format to HTML
+        $mail->Subject = 'Nuevo enlace para cambio de contraseña - IESTP Huanta';
+        $mail->Body    = '
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Correo Empresarial</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #8DE0F2;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background-color: #ffffff;
+      font-family: Arial, sans-serif;
+      color: #333333;
+      border: 1px solid #dddddd;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .header {
+      background-color: #03588C;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .header h2 {
+      margin: 0 0 8px 0;
+      font-size: 18px;
+    }
+    .header-subtitle {
+      margin: 0;
+      font-size: 13px;
+      opacity: 0.9;
+    }
+    .color-bar {
+      height: 5px;
+      background: linear-gradient(90deg, #9FD923 0%, #F2E205 50%, #8DE0F2 100%);
+    }
+    .content {
+      padding: 30px;
+    }
+    .content h1 {
+      font-size: 22px;
+      margin-bottom: 20px;
+      color: #03588C;
+    }
+    .content p {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .alert-box {
+      background-color: #F2E205;
+      border: 2px solid #9FD923;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .alert-box p {
+      margin: 0;
+      font-size: 14px;
+      font-weight: bold;
+      color: #333;
+    }
+    .button {
+      display: inline-block;
+      background-color: #03588C;
+      color: #ffffff !important;
+      padding: 15px 30px;
+      margin: 20px 0;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 16px;
+      box-shadow: 0 4px 8px rgba(3, 88, 140, 0.3);
+      transition: all 0.3s;
+    }
+    .button:hover {
+      background-color: #9FD923;
+      color: #333333 !important;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(159, 217, 35, 0.4);
+    }
+    .highlight {
+      color: #03588C;
+      font-weight: bold;
+    }
+    .footer {
+      background-color: #03588C;
+      text-align: center;
+      padding: 15px;
+      font-size: 12px;
+      color: #ffffff;
+    }
+    .footer a {
+      color: #8DE0F2;
+      text-decoration: none;
+    }
+    .footer a:hover {
+      color: #9FD923;
+    }
+    @media screen and (max-width: 600px) {
+      .content, .header, .footer {
+        padding: 15px !important;
+      }
+      .button {
+        padding: 10px 20px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>Instituto de Educación Superior Tecnológico Público Huanta</h2>
+      <p class="header-subtitle">Excelencia Educativa - Innovación Tecnológica</p>
+    </div>
+    <div class="color-bar"></div>
+    <div class="content">
+    <center><img src="https://sispa.iestphuanta.edu.pe/img/logo.png"  width="200"></center>
+      <h1>Hola ' . $datos_usuario->nombres_apellidos . ',</h1>
+      <p>
+        Hola, te enviamos este nuevo enlace para tu cambio de contraseña.
+      </p>
+      <div class="alert-box">
+        <p>🔒 Por tu seguridad, este enlace expirará en 24 horas</p>
+      </div>
+      <p>
+        Si solicitaste este cambio, haz clic en el botón de abajo para crear tu nueva contraseña. Si no realizaste esta solicitud, puedes ignorar este correo de forma segura.
+      </p>
+      <center>
+       <a href="' . BASE_URL . 'reset-password/?data=' . $id . '&data2=' . urlencode($token_hash) . '" class="button">Cambiar Contraseña</a>
+      </center>
+      <p class="highlight">Gracias por confiar en nosotros para tu formación profesional.</p>
+    </div>
+    <div class="footer">
+      © 2025 Instituto de Educación Superior Tecnológico Público Huanta. Todos los derechos reservados.<br>
+      Ayacucho, Perú | <a href="mailto:soporte@iestphuanta.edu.pe">soporte@iestphuanta.edu.pe</a><br>
+      <a href="' . BASE_URL . '">Cancelar suscripción</a>
+    </div>
+  </div>
+</body>
+</html>
+    ';
+
+        $mail->send();
+        $arr_Respuesta['status'] = true;
+        $arr_Respuesta['msg'] = 'Se envió correctamente el nuevo enlace';
+      } catch (Exception $e) {
+        $arr_Respuesta['msg'] = "Error al enviar el correo: {$mail->ErrorInfo}";
+      }
+    }
+  }
+
+  echo json_encode($arr_Respuesta);
+}

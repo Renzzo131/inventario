@@ -193,10 +193,66 @@ async function validar_datos_reset_password() {
                 timer: 5000
             });
             let formulario = document.getElementById('frm_reset_password');
-            formulario.innerHTML = `Click en este boton para generar otro`;
-            
-            //ASIGNAR BOTON CON REDIRECCION PARA EL LINK CADUCADO COMO (Clic en este boton para generar otro)
-            //location.replace(base_url + "login");
+            formulario.innerHTML = `
+  <div class="text-center">
+    <p>El link ha caducado. Puedes generar uno nuevo a tu correo electrónico.</p>
+    <button id="btnGenerarLinkNuevo" type="button" class="btn btn-warning mt-3">Generar nuevo enlace</button>
+  </div>
+`;
+
+            document.getElementById('btnGenerarLinkNuevo').addEventListener('click', async function () {
+                const boton = this;
+                boton.disabled = true;
+
+                Swal.fire({
+                    title: 'Enviando...',
+                    text: 'Generando nuevo enlace. Por favor espera...',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+
+                const formDataNuevo = new FormData();
+                formDataNuevo.append('id', id);
+                formDataNuevo.append('sesion', '');
+                formDataNuevo.append('token', '');
+
+                try {
+                    let respuesta = await fetch(base_url_server + 'src/control/Usuario.php?tipo=generar_nuevo_link_password', {
+                        method: 'POST',
+                        mode: 'cors',
+                        cache: 'no-cache',
+                        body: formDataNuevo
+                    });
+
+                    let jsonNuevo = await respuesta.json();
+                    Swal.close(); // cierra el loader
+
+                    if (jsonNuevo.status) {
+                        Swal.fire({
+                            type:'success',
+                            title: 'Correo enviado',
+                            text: 'Se ha enviado un nuevo enlace a tu correo.',
+                            timer: 4000
+                        });
+                    } else {
+                        Swal.fire({
+                            type:'error',
+                            title: 'Error',
+                            text: jsonNuevo.msg,
+                            timer: 4000
+                        });
+                    }
+                } catch (e) {
+                    Swal.close(); // cierra el loader si hubo error
+                    Swal.fire('Error', 'No se pudo enviar el nuevo enlace', 'error');
+                } finally {
+                    boton.disabled = false;
+                }
+            });
+
+
         }
         //console.log(respuesta);
     } catch (error) {
@@ -212,23 +268,23 @@ function validar_inputs_password() {
 
     if (pass1 !== pass2) {
         Swal.fire({
-                type: 'error',
-                title: 'Error',
-                text: "Las contraseñas no coinciden",
-                footer: '',
-                timer: 3000
-            });
-            return;
+            type: 'error',
+            title: 'Error',
+            text: "Las contraseñas no coinciden",
+            footer: '',
+            timer: 3000
+        });
+        return;
     }
     if (pass1.length < 8 && pass2.length < 8) {
-                Swal.fire({
-                type: 'error',
-                title: 'Error',
-                text: "La contraseña debe ser de mínimo 8 caracteres",
-                footer: '',
-                timer: 3000
-            });
-            return;
+        Swal.fire({
+            type: 'error',
+            title: 'Error',
+            text: "La contraseña debe ser de mínimo 8 caracteres",
+            footer: '',
+            timer: 3000
+        });
+        return;
     } else {
         actualizar_password();
     }
@@ -261,7 +317,7 @@ async function actualizar_password() {
                 timer: 3000
             });
 
-            
+
             setTimeout(() => {
                 window.location.href = base_url + "login";
             }, 3000);
