@@ -193,7 +193,9 @@ async function validar_datos_reset_password() {
                 timer: 5000
             });
             let formulario = document.getElementById('frm_reset_password');
-            formulario.innerHTML = `No molestes oe especial`;//ASIGNAR BOTON CON REDIRECCION PARA EL LINK CADUCADO COMO (Clic en este boton para generar otro)
+            formulario.innerHTML = `Click en este boton para generar otro`;
+            
+            //ASIGNAR BOTON CON REDIRECCION PARA EL LINK CADUCADO COMO (Clic en este boton para generar otro)
             //location.replace(base_url + "login");
         }
         //console.log(respuesta);
@@ -289,4 +291,3 @@ async function actualizar_password() {
 //guardar en base de datos y actualizar campo de reset_password  = 0 y token_password = ''
 //notificar al usuario sobre el estado del proceso (tipo alerta para no saturar el sistema o por correo)
 //ASIGNAR BOTON CON REDIRECCION PARA EL LINK CADUCADO COMO (Clic en este boton para generar otro)
-
