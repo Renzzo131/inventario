@@ -205,6 +205,9 @@ async function validar_datos_reset_password() {
 function validar_inputs_password() {
     let pass1 = document.getElementById('password').value;
     let pass2 = document.getElementById('password1').value;
+
+
+
     if (pass1 !== pass2) {
         Swal.fire({
                 type: 'error',
@@ -230,18 +233,60 @@ function validar_inputs_password() {
 }
 
 async function actualizar_password() {
+    const id = document.getElementById('data').value;
+    const password = document.getElementById('password').value;
+
+    const formData = new FormData();
+    formData.append('id', id);
+    formData.append('password', password);
+    formData.append('sesion', '');
+    formData.append('token', '');
+
+
+    try {
+        const respuesta = await fetch(base_url_server + 'src/control/Usuario.php?tipo=nuevo_password', {
+            method: 'POST',
+            body: formData
+        });
+
+        const json = await respuesta.json();
+
+        if (json.status === true) {
             Swal.fire({
                 type: 'success',
-                title: 'Contraseña actualizada',
-                text: "La contraseña se actualizo correctamente",
-                footer: '',
+                title: '¡Contraseña actualizada!',
+                text: json.mensaje,
                 timer: 3000
             });
-            return;
+
+            
+            setTimeout(() => {
+                window.location.href = base_url + "login";
+            }, 3000);
+
+
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: json.mensaje,
+                timer: 3000
+            });
+        }
+    } catch (error) {
+        console.error("Error en la petición:", error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error del servidor',
+            text: 'Ocurrió un error al actualizar la contraseña.',
+            timer: 3000
+        });
+    }
+}
+
 //enviar informacion de password y id al controlador del usuario
 //recibir informacion y encriptar la nueva contraseña
 //guardar en base de datos y actualizar campo de reset_password  = 0 y token_password = ''
 //notificar al usuario sobre el estado del proceso (tipo alerta para no saturar el sistema o por correo)
 //ASIGNAR BOTON CON REDIRECCION PARA EL LINK CADUCADO COMO (Clic en este boton para generar otro)
-}
 

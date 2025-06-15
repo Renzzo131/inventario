@@ -161,14 +161,7 @@ if ($tipo == "send_email_password") {
         $token = password_hash($llave, PASSWORD_DEFAULT);
         $update = $objUsuario->updateResetPassword($datos_sesion->id_usuario, $llave, 1);
         if ($update) {
-            //Import PHPMailer classes into the global namespace
-//These must be at the top of your script, not inside a function
 
-
-//Load Composer's autoloader (created by composer, not included with PHPMailer)
-
-
-//Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
 
 try {
@@ -358,4 +351,31 @@ try {
         }
         //print_r($token);
     }
+}
+
+if ($tipo == "nuevo_password") {
+    $arr_Respuesta = array('status' => false, 'msg' => 'Error al procesar la solicitud');
+
+    if ($_POST) {
+        $id_usuario = $_POST['id'] ?? '';
+        $nueva_password = $_POST['password'] ?? '';
+
+        if ($id_usuario == "" || $nueva_password == "") {
+            $arr_Respuesta = array('status' => false, 'mensaje' => 'Error, datos incompletos');
+        } else {
+            // Encriptar contraseña
+            $pass_secure = password_hash($nueva_password, PASSWORD_DEFAULT);
+
+            // Actualizar en base de datos: password, reset_password = 0 y token_password = ''
+            $actualizado = $objUsuario->nuevoPassword($id_usuario, $pass_secure);
+
+            if ($actualizado) {
+                $arr_Respuesta = array('status' => true, 'mensaje' => 'Contraseña actualizada exitosamente.');
+            } else {
+                $arr_Respuesta = array('status' => false, 'mensaje' => 'Error al actualizar la contraseña.');
+            }
+        }
+    }
+
+    echo json_encode($arr_Respuesta);
 }

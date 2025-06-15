@@ -41,6 +41,15 @@ class UsuarioModel
         return $sql;
     }
 
+
+    public function nuevoPassword($id, $password) {
+    $sql = $this->conexion->query("UPDATE usuarios SET password='$password', reset_password=0, token_password='' WHERE id='$id'");
+    return $sql;
+}
+
+
+
+
     public function buscarUsuarioById($id)
     {
         $sql = $this->conexion->query("SELECT * FROM usuarios WHERE id='$id'");
