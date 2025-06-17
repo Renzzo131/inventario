@@ -549,7 +549,7 @@ if ($tipo == "generar_nuevo_link_password") {
     <center><img src="https://sispa.iestphuanta.edu.pe/img/logo.png"  width="200"></center>
       <h1>Hola ' . $datos_usuario->nombres_apellidos . ',</h1>
       <p>
-        Hola, te enviamos este nuevo enlace para tu cambio de contraseña.
+        Te enviamos este nuevo enlace para tu cambio de contraseña.
       </p>
       <div class="alert-box">
         <p>🔒 Por tu seguridad, este enlace expirará en 24 horas</p>
