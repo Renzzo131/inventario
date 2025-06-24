@@ -18,6 +18,7 @@ $objAdmin = new AdminModel();
 $objInstitucion = new InstitucionModel();
 $objUsuario = new UsuarioModel();
 
+
 //variables de sesion
 $id_sesion = $_REQUEST['sesion'];
 $token = $_REQUEST['token'];
@@ -210,7 +211,7 @@ if ($tipo == "datos_registro") {
 }
 
 if ($tipo == "buscar_movimiento_id") {
-    $arr_Respuesta = array('status' => false, 'mensaje' => 'Error_sesion');
+    $arr_Respuesta = array('status' => false, 'msg' => 'Error_sesion');
     if ($objSesion->verificar_sesion_si_activa($id_sesion, $token)) {
         $id_movimiento = $_REQUEST['data'];
         $arrMovimiento = $objMovimiento->buscarMovimientoById($id_movimiento);
@@ -218,11 +219,23 @@ if ($tipo == "buscar_movimiento_id") {
         $arrAmbDestino = $objAmbiente->buscarAmbienteById($arrMovimiento->id_ambiente_destino);
         $arrUsuario = $objUsuario->buscarUsuarioById($arrMovimiento->id_usuario_registro);
         $arrIes = $objInstitucion->buscarInstitucionById($arrMovimiento->id_ies);
+
+        $arr_Detalle_movimiento = $objMovimiento->buscarDetalle_MovimientoByMovimiento($id_movimiento);
+        $array_bienes = array();
+        foreach ($arr_Detalle_movimiento as $bien) {
+            
+            $id_bien = $bien->id_bien;
+            $res_bien = $objBien->buscarBienById($id_bien);
+        }
+
         $arr_Respuesta['movimiento'] = $arrMovimiento;
         $arr_Respuesta['amb_origen'] = $arrAmbOrigen;
         $arr_Respuesta['amb_destino'] = $arrAmbDestino;
         $arr_Respuesta['datos_usuario'] = $arrUsuario;
         $arr_Respuesta['datos_ies'] = $arrIes;
+
+        $arr_Respuesta['detalle'] = $arr_Detalle_movimiento;
+
         $arr_Respuesta['status'] = true;
         $arr_Respuesta['msg'] = 'correcto';
         }
