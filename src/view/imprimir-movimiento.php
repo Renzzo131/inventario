@@ -29,8 +29,185 @@
         echo "cURL Error #:" . $err; // mostramos el error
     } else {
         $respuesta = json_decode($response);
-        print_r ($respuesta);
+        //print_r ($respuesta);
          // en caso de funcionar correctamente
         /*echo $_SESSION['sesion_sigi_id'];
         echo $_SESSION['sesion_sigi_token'];*/
+        ?>
+        <!--
+        <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Papeleta de Rotación de Bienes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
     }
+
+    h2 {
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    p {
+      margin: 8px 0;
+    }
+
+    .subrayado {
+      display: inline-block;
+      min-width: 200px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: center;
+    }
+
+    .firmas {
+      margin-top: 60px;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 50px;
+    }
+
+    .firma {
+      text-align: center;
+    }
+
+    .firma-linea {
+      margin-bottom: 5px;
+    }
+
+    .footer-fecha {
+      margin-top: 40px;
+      text-align: right;
+      padding-right: 40px;
+    }
+
+    .motivo {
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Papeleta de Rotación de Bienes</h2>
+
+  <p>ENTIDAD <span class="subrayado">: DIRECCION REGIONAL DE EDUCACION - AYACUCHO</span></p>
+  <p>ÁREA <span class="subrayado">: OFICINA DE ADMINISTRACIÓN</span></p>
+  <p>ORIGEN <span class="subrayado">: <?php echo $respuesta->amb_origen->codigo.' - '.$respuesta->amb_origen->detalle;?></span></p>
+  <p>DESTINO <span class="subrayado">: <?php echo $respuesta->amb_destino->codigo.' - '. $respuesta->amb_destino->detalle?></span></p>
+
+  <p class="motivo">MOTIVO (*): <span class="subrayado"><?php echo $respuesta->movimiento->descripcion;?></span></p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ITEM</th>
+        <th>CÓDIGO PATRIMONIAL</th>
+        <th>NOMBRE DEL BIEN</th>
+        <th>MARCA</th>
+        <th>COLOR</th>
+        <th>MODELO</th>
+        <th>ESTADO</th>
+      </tr>
+    </thead>
+    <tbody>
+        <?php
+        $contador = 1;
+        foreach ($respuesta->detalle as $bien) {
+            echo "<tr>";
+            echo "<td>".$contador."</td>";
+            echo "<td>".$bien->cod_patrimonial."</td>";
+            echo "<td>".$bien->denominacion."</td>";
+            echo "<td>".$bien->marca."</td>";
+            echo "<td>".$bien->color."</td>";
+            echo "<td>".$bien->modelo."</td>";
+            echo "<td>".$bien->estado_conservacion."</td>";
+            echo "<tr>";
+            $contador +=1;
+        }
+
+        $fecha_original = $respuesta->movimiento->fecha_registro; // Ejemplo de la fecha
+
+setlocale(LC_TIME, 'es_ES.UTF-8'); // Para sistemas que lo soporten
+$date = new DateTime($fecha_original);
+$dia = $date->format('j'); // Día sin ceros
+$mes = $date->format('F'); // Nombre del mes en inglés
+$anio = $date->format('Y');
+
+// Traducimos el mes al español manualmente (más confiable)
+$meses = [
+    'January' => 'enero',
+    'February' => 'febrero',
+    'March' => 'marzo',
+    'April' => 'abril',
+    'May' => 'mayo',
+    'June' => 'junio',
+    'July' => 'julio',
+    'August' => 'agosto',
+    'September' => 'septiembre',
+    'October' => 'octubre',
+    'November' => 'noviembre',
+    'December' => 'diciembre'
+];
+
+$mes_es = $meses[$mes];
+
+ // Resultado: "21 de abril"
+
+        ?>
+    </tbody>
+  </table>
+
+  <div class="footer-fecha">
+    Ayacucho, <?php echo $dia . " de " . $mes_es. " del ".$anio ;?>
+  </div>
+
+  <div class="firmas">
+    <div class="firma">
+      <div class="firma-linea">------------------------------</div>
+      <div>ENTREGUE CONFORME</div>
+    </div>
+    <div class="firma">
+      <div class="firma-linea">------------------------------</div>
+      <div>RECIBÍ CONFORME</div>
+    </div>
+  </div>
+
+</body>
+</html> -->
+
+        <?php
+
+    require_once('./vendor/tecnickcom/tcpdf/tcpdf.php');
+
+$pdf = new TCPDF();
+$pdf->SetCreator(PDF_CREATOR);
+$pdf->SetAuthor('Renzo Gamboa');
+$pdf->SetTitle('Reporte de movimientos');
+
+//asignar márgenes
+$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+//Salto de página automático
+$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+
+//Va por secciones si quieres utilizar distintas fuentes
+$pdf->SetFont('dejavusans', '', 10);
+
+    }
+    
+    
