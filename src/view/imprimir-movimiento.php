@@ -28,7 +28,7 @@
     if ($err) {
         echo "cURL Error #:" . $err; // mostramos el error
     } else {
-        $respuesta = json_decode($response);/*Usar hasta aquí para poder generar el excel------------------------*/
+        $respuesta = json_decode($response);/*Usar hasta aquí para poder generar el excel------------------------ ambiente y usuario que registro, con su nombre*/
         //print_r ($respuesta);
          // en caso de funcionar correctamente
         /*echo $_SESSION['sesion_sigi_id'];
