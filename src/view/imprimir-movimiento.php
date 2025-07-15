@@ -122,7 +122,14 @@
     <tbody>
         
         ';
-     
+     if (empty($respuesta->detalle)) {
+      $contenido_pdf .= '<tr>
+      <td colspan = "7" style="text-align: center; border: 0.3px solid #444; font-size: 12.5px; font-weight: 300; ">
+      No se encontraron bienes registrados para este movimiento
+      </td>
+      </tr>
+      ';
+     } else {
         $contador = 1;
 foreach ($respuesta->detalle as $bien) {
     $contenido_pdf .= '<tr>';
@@ -136,6 +143,9 @@ foreach ($respuesta->detalle as $bien) {
     $contenido_pdf .= '</tr>';
     $contador++;
 }
+     }
+     
+      
 
 $fecha_raw = $respuesta->movimiento->fecha_registro; // esta es la que te llega
 
