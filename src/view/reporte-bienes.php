@@ -6,12 +6,44 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 $spreadsheet = new Spreadsheet();
-$spreadsheet ->getProperties()->setCreator("yp")->setLastModifiedBy("yo")->setTitle("yo")->setDescription("yo");
+$spreadsheet ->getProperties()->setCreator("yo")->setLastModifiedBy("yo")->setTitle("yo")->setDescription("yo");
 $activeWorksheet = $spreadsheet->getActiveSheet();
 $activeWorksheet->setTitle("hoja 1");
-$activeWorksheet->setCellValue('A1', 'Hola Mundo !');
-$activeWorksheet->setCellValue('A2', 'DNI');
-$activeWorksheet->setCellValue('B2', '73004125');
+
+
+
+
+/*$a = 2 ;
+while ($a <= 100) {
+    $activeWorksheet->setCellValue('A'.$a, $a);
+    $a++; 
+}
+
+$fila = 1;
+$col = 1;
+while ($col <= 100) {
+    $celda = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex($col) . $fila;
+    $activeWorksheet->setCellValue($celda, $col);
+    $col++;
+}*/
+
+
+$a = 1;
+$b = 1;
+while ($b <= 12) {
+        $activeWorksheet->setCellValue('A'.$b, $a);
+        $activeWorksheet->setCellValue('B'.$b, 'x');
+        $activeWorksheet->setCellValue('C'.$b, $b);
+        $activeWorksheet->setCellValue('D'.$b, '=');
+        $activeWorksheet->setCellValue('E'.$b, $a * $b);
+    $b++; 
+
+}
+
+
+//$activeWorksheet->setCellValue('A1', 'Hola Mundo !');
+//$activeWorksheet->setCellValue('A2', 'DNI');
+//$activeWorksheet->setCellValue('B2', '73004125');
 
 //$activeWorksheet->setCellValueByColumnAndRow();
 
