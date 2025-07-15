@@ -63,14 +63,7 @@
 
     table {
       width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
     }
-
-    table, th, td {
-      border: 1px solid black;
-    }
-
     th, td {
       padding: 8px;
       text-align: center;
@@ -104,9 +97,9 @@
   </style>
 </head>
 <body>
-
-  <h2>Papeleta de Rotación de Bienes</h2>
-
+<br><br><br>
+  <h2><i>Papeleta de Rotación de Bienes</i></h2>
+<br><br>
   <p>ENTIDAD <span class="subrayado">: DIRECCION REGIONAL DE EDUCACION - AYACUCHO</span></p>
   <p>ÁREA <span class="subrayado">: OFICINA DE ADMINISTRACIÓN</span></p>
   <p>ORIGEN <span class="subrayado">: '. $respuesta->amb_origen->codigo.' - '.$respuesta->amb_origen->detalle.'</span></p>
@@ -114,16 +107,16 @@
 
   <p class="motivo">MOTIVO (*): <span class="subrayado">'. $respuesta->movimiento->descripcion.'</span></p>
 
-  <table border="1">
+  <table style="width: 100%; border-collapse: collapse; margin-top: 20px;" cellspacing="0" cellpadding="4">
     <thead>
       <tr>
-        <th>ITEM</th>
-        <th>CÓDIGO PATRIMONIAL</th>
-        <th>NOMBRE DEL BIEN</th>
-        <th>MARCA</th>
-        <th>COLOR</th>
-        <th>MODELO</th>
-        <th>ESTADO</th>
+        <th style="border: 0.3px solid #444; background-color: #f2f2f2;">ITEM</th>
+        <th style="border: 0.3px solid #444; background-color: #f2f2f2;">CÓDIGO PATRIMONIAL</th>
+        <th style="border: 0.3px solid #444; background-color: #f2f2f2;">NOMBRE DEL BIEN</th>
+        <th style="border: 0.3px solid #444; background-color: #f2f2f2;">MARCA</th>
+        <th style="border: 0.3px solid #444; background-color: #f2f2f2;">COLOR</th>
+        <th style="border: 0.3px solid #444; background-color: #f2f2f2;">MODELO</th>
+        <th style="border: 0.3px solid #444; background-color: #f2f2f2;">ESTADO</th>
       </tr>
     </thead>
     <tbody>
@@ -131,37 +124,66 @@
         ';
      
         $contador = 1;
-        foreach ($respuesta->detalle as $bien) {
-            $contenido_pdf .= "<tr>";
-            $contenido_pdf .= "<td>".$contador."</td>";
-            $contenido_pdf .= "<td>".$bien->cod_patrimonial."</td>";
-            $contenido_pdf .= "<td>".$bien->denominacion."</td>";
-            $contenido_pdf .= "<td>".$bien->marca."</td>";
-            $contenido_pdf .= "<td>".$bien->color."</td>";
-            $contenido_pdf .= "<td>".$bien->modelo."</td>";
-            $contenido_pdf .= "<td>".$bien->estado_conservacion."</td>";
-            $contenido_pdf .= "</tr>";
-            $contador +=1;
-        }
+foreach ($respuesta->detalle as $bien) {
+    $contenido_pdf .= '<tr>';
+    $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$contador.'</td>';
+    $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$bien->cod_patrimonial.'</td>';
+    $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$bien->denominacion.'</td>';
+    $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$bien->marca.'</td>';
+    $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$bien->color.'</td>';
+    $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$bien->modelo.'</td>';
+    $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$bien->estado_conservacion.'</td>';
+    $contenido_pdf .= '</tr>';
+    $contador++;
+}
+
+$fecha_raw = $respuesta->movimiento->fecha_registro; // esta es la que te llega
+
+// 1. Convertir la fecha al formato correcto
+$fecha_obj = DateTime::createFromFormat('Y-m-d H:i:s', $fecha_raw);
+
+// 2. Array de meses en español
+$meses = [
+    1 => "enero", "febrero", "marzo", "abril", "mayo", "junio",
+    "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
+];
+
+// 3. Verificamos que se haya parseado bien
+if ($fecha_obj instanceof DateTime) {
+    $dia = $fecha_obj->format('j');
+    $mes = (int)$fecha_obj->format('n');
+    $anio = $fecha_obj->format('Y');
+
+    // 4. Formatear la fecha
+    $fecha_formateada = "$dia de " . $meses[$mes] . " de $anio";
+} else {
+    $fecha_formateada = "Fecha inválida";
+}
+
+
 $contenido_pdf .= '
 
     </tbody>
   </table>
 
   <p style="text-align: right; padding-right: 40px;">
-  Ayacucho,_____de____2025
+  Ayacucho, '.$dia.' de '.$meses[$mes].' de '.$anio.'
 </p>
-
-  <div class="firmas">
-    <div class="firma">
-      <div class="firma-linea">------------------------------</div>
-      <div>ENTREGUE CONFORME</div>
-    </div>
-    <div class="firma">
-      <div class="firma-linea">------------------------------</div>
-      <div>RECIBÍ CONFORME</div>
-    </div>
-  </div>
+ <table style="width: 100%; border: none;" cellspacing="0" cellpadding="0">
+    <tr>
+      <td style="height: 40px;"></td>
+    </tr>
+    <tr>
+      <td style="width: 50%; text-align: center;">
+        ------------------------------<br>
+        ENTREGUE CONFORME
+      </td>
+      <td style="width: 50%; text-align: center;">
+        ------------------------------<br>
+        RECIBÍ CONFORME
+      </td>
+    </tr>
+  </table>
 
 </body>
 </html>
@@ -172,7 +194,35 @@ $contenido_pdf .= '
 
     require_once('./vendor/tecnickcom/tcpdf/tcpdf.php');
 
-$pdf = new TCPDF();
+
+class MYPDF extends TCPDF {
+    public function Header() {
+
+        $this->Image('./src/view/pp/assets/images/gobierno_logo.jpg', 15, 10, 28, '', 'JPG', '', 'T', false, 150); // logo izquierdo
+        $this->Image('./src/view/pp/assets/images/drea_logo.jpg', 165, 10, 28, '', 'JPG', '', 'T', false, 150); // logo derecho
+
+        $this->SetY(10);
+        $this->SetFont('helvetica', 'B', 10);
+        $this->Cell(0, 10, 'GOBIERNO REGIONAL DE AYACUCHO', 0, false, 'C');
+        $this->Ln(8);
+        $this->SetFont('helvetica', 'B', 12);
+        $this->Cell(0, 10, 'DIRECCIÓN REGIONAL DE EDUCACIÓN DE AYACUCHO', 0, false, 'C');
+        $this->Ln(8);
+        $this->SetFont('helvetica', 'B', 10);
+        $this->Cell(0, 10, 'DIRECCIÓN DE ADMINISTRACIÓN', 0, false, 'C');
+    }
+
+    public function Footer() {
+        $this->SetY(-15);
+        $this->SetFont('helvetica', 'I', 8);
+        $this->Cell(0, 10, 'Página '.$this->getAliasNumPage().' de '.$this->getAliasNbPages(), 0, false, 'C');
+    }
+}
+
+$pdf = new MYPDF();
+
+
+
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Renzo Gamboa');
 $pdf->SetTitle('Reporte de movimientos');
