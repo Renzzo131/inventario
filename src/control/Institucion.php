@@ -12,8 +12,10 @@ $objInstitucion = new InstitucionModel();
 $objUsuario = new UsuarioModel();
 
 //variables de sesion
-$id_sesion = $_POST['sesion'];
-$token = $_POST['token'];
+$id_sesion = $_REQUEST['sesion'];
+$token = $_REQUEST['token'];
+
+
 if ($tipo == "listar") {
     $arr_Respuesta = array('status' => false, 'msg' => 'Error_Sesion');
     if ($objSesion->verificar_sesion_si_activa($id_sesion, $token)) {
@@ -175,5 +177,21 @@ if ($tipo == "datos_registro") {
         }
         $arr_Respuesta['msg'] = "Datos encontrados";
     }
+    echo json_encode($arr_Respuesta);
+}
+
+
+if ($tipo == "buscar_instituciones") {
+    $arr_Respuesta = array('status' => false, 'msg' => 'Error_sesion');
+
+    if ($objSesion->verificar_sesion_si_activa($id_sesion, $token)) {
+
+        $instituciones = $objInstitucion->obtenerTodasLasInstituciones();
+
+        $arr_Respuesta['status'] = true;
+        $arr_Respuesta['msg'] = 'correcto';
+        $arr_Respuesta['instituciones'] = $instituciones;
+    }
+
     echo json_encode($arr_Respuesta);
 }
