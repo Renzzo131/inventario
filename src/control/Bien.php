@@ -15,8 +15,8 @@ $objAmbiente = new AmbienteModel();
 $objAdmin = new AdminModel();
 
 //variables de sesion
-$id_sesion = $_POST['sesion'];
-$token = $_POST['token'];
+$id_sesion = $_REQUEST['sesion'];
+$token = $_REQUEST['token'];
 
 if ($tipo == "buscar_bien_movimiento") {
     $arr_Respuesta = array('status' => false, 'msg' => 'Error_Sesion');
@@ -225,5 +225,20 @@ if ($tipo == "datos_registro") {
         $arr_Respuesta['status'] = true;
         $arr_Respuesta['msg'] = "Datos encontrados";
     }
+    echo json_encode($arr_Respuesta);
+}
+
+if ($tipo == "buscar_bienes") {
+    $arr_Respuesta = array('status' => false, 'msg' => 'Error_sesion');
+
+    if ($objSesion->verificar_sesion_si_activa($id_sesion, $token)) {
+
+        $bienes = $objBien->buscarTodosLosBienes();
+
+        $arr_Respuesta['status'] = true;
+        $arr_Respuesta['msg'] = 'correcto';
+        $arr_Respuesta['bienes'] = $bienes;
+    }
+
     echo json_encode($arr_Respuesta);
 }
