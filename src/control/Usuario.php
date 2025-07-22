@@ -166,10 +166,10 @@ if ($tipo == "send_email_password") {
         //Server settings
         $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
         $mail->isSMTP();                                            //Send using SMTP
-        $mail->Host       = 'mail.programacion2024.com';                     //Set the SMTP server to send through
+        $mail->Host       = 'inventario.renzo.serviciosvirtuales.com.pe';                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $mail->Username   = 'renzo_1304@programacion2024.com';                     //SMTP username
-        $mail->Password   = 'mqaaGWIP1Ci%';                               //SMTP password
+        $mail->Username   = '	rencitobonito@inventario.renzo.serviciosvirtuales.com.pe';                     //SMTP username
+        $mail->Password   = 'ReyRenzo131#';                               //SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
@@ -397,12 +397,12 @@ if ($tipo == "generar_nuevo_link_password") {
 
       try {
         //Server settings
-        $mail->SMTPDebug = 0;                      //Enable verbose debug output
+        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
         $mail->isSMTP();                                            //Send using SMTP
-        $mail->Host       = 'mail.programacion2024.com';                     //Set the SMTP server to send through
+        $mail->Host       = 'inventario.renzo.serviciosvirtuales.com.pe';                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $mail->Username   = 'renzo_1304@programacion2024.com';                     //SMTP username
-        $mail->Password   = 'mqaaGWIP1Ci%';                               //SMTP password
+        $mail->Username   = '	rencitobonito@inventario.renzo.serviciosvirtuales.com.pe';                     //SMTP username
+        $mail->Password   = 'ReyRenzo131#';                               //SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
