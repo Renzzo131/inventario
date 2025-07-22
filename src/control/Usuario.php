@@ -16,8 +16,8 @@ $objSesion = new SessionModel();
 $objUsuario = new UsuarioModel();
 $objAdmin = new AdminModel();
 
-$id_sesion = $_POST['sesion'];
-$token = $_POST['token'];
+$id_sesion = $_REQUEST['sesion'];
+$token = $_REQUEST['token'];
 
 if ($tipo == "validar_datos_reset_password") {
   $id_email = $_POST['id'];
@@ -582,4 +582,20 @@ if ($tipo == "generar_nuevo_link_password") {
   }
 
   echo json_encode($arr_Respuesta);
+}
+
+
+if ($tipo == "buscar_usuarios") {
+    $arr_Respuesta = array('status' => false, 'msg' => 'Error_sesion');
+
+    if ($objSesion->verificar_sesion_si_activa($id_sesion, $token)) {
+
+        $usuarios = $objUsuario->obtenerTodosLosUsuarios();
+
+        $arr_Respuesta['status'] = true;
+        $arr_Respuesta['msg'] = 'correcto';
+        $arr_Respuesta['usuarios'] = $usuarios;
+    }
+
+    echo json_encode($arr_Respuesta);
 }

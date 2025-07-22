@@ -3,7 +3,7 @@ require './vendor/autoload.php';
 
     $curl = curl_init(); //inicia la sesión cURL
     curl_setopt_array($curl, array(
-        CURLOPT_URL => BASE_URL_SERVER."src/control/Bien.php?tipo=buscar_bienes&sesion=".$_SESSION['sesion_id']."&token=".$_SESSION['sesion_token'], //url a la que se conecta
+        CURLOPT_URL => BASE_URL_SERVER."src/control/Usuario.php?tipo=buscar_usuarios&sesion=".$_SESSION['sesion_id']."&token=".$_SESSION['sesion_token'], //url a la que se conecta
         CURLOPT_RETURNTRANSFER => true, //devuelve el resultado como una cadena del tipo curl_exec
         CURLOPT_FOLLOWLOCATION => true, //sigue el encabezado que le envíe el servidor
         CURLOPT_ENCODING => "", // permite decodificar la respuesta y puede ser"identity", "deflate", y "gzip", si está vacío recibe todos los disponibles.
@@ -23,11 +23,12 @@ require './vendor/autoload.php';
     } else {
         $respuesta = json_decode($response);
     }
-    if (!isset($respuesta->bienes) || !is_array($respuesta->bienes)) {
-    echo "Error al obtener los bienes.";
+if (!isset($respuesta->usuarios) || !is_array($respuesta->usuarios)) {
+    echo "Error al obtener los usuarios.";
     echo "<pre>"; print_r($respuesta); echo "</pre>";
     exit;
 }
+
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -38,7 +39,7 @@ $activeWorksheet = $spreadsheet->getActiveSheet();
 $activeWorksheet->setTitle("hoja 1");
 
 $fila = 1;
-$headers = ['N°','Descripción', 'Ambiente', 'Código patrimonial', 'Denominación', 'Marca', 'Modelo', 'Tipo', 'Color', 'Serie', 'Dimensiones', 'Valor', 'Situación', 'Estado de conservación', 'Observaciones', 'Fecha de registro', 'Usuario registrante'];
+$headers = ['N°','DNI', 'Nombres y apellidos', 'Correo', 'Teléfono', 'Fecha de registro'];
 
 $colIndex = 'A';
 foreach ($headers as $header) {
@@ -50,7 +51,7 @@ use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Font;
 
 // Rango de los encabezados, por ejemplo A1:H1 (ajústalo según la cantidad de columnas que tengas)
-$encabezadoRange = 'A1:Q1';
+$encabezadoRange = 'A1:F1';
 
 // Aplicar estilos al encabezado
 $styleArray = [
@@ -79,42 +80,31 @@ $styleArray = [
 $activeWorksheet->getStyle($encabezadoRange)->applyFromArray($styleArray);
 
 // También puedes hacer que las columnas se ajusten automáticamente:
-foreach (range('A', 'Q') as $col) {
+foreach (range('A', 'F') as $col) {
     $activeWorksheet->getColumnDimension($col)->setAutoSize(true);
 }
 
 
 $fila = 2;
 $contador = 1;
-foreach ($respuesta->bienes as $bien) {
+foreach ($respuesta->usuarios as $usuario) {
     $activeWorksheet->setCellValue('A'.$fila, $contador);
-    $activeWorksheet->setCellValue('B'.$fila, $bien->ingreso_detalle);
-    $activeWorksheet->setCellValue('C'.$fila, $bien->ambiente_detalle);
-    $activeWorksheet->setCellValue('D'.$fila, $bien->cod_patrimonial);
-    $activeWorksheet->setCellValue('E'.$fila, $bien->denominacion);
-    $activeWorksheet->setCellValue('F'.$fila, $bien->marca);
-    $activeWorksheet->setCellValue('G'.$fila, $bien->modelo);
-    $activeWorksheet->setCellValue('H'.$fila, $bien->tipo);
-    $activeWorksheet->setCellValue('I'.$fila, $bien->color);
-    $activeWorksheet->setCellValue('J'.$fila, $bien->serie);
-    $activeWorksheet->setCellValue('K'.$fila, $bien->dimensiones);
-    $activeWorksheet->setCellValue('L'.$fila, $bien->valor);
-    $activeWorksheet->setCellValue('M'.$fila, $bien->situacion);
-    $activeWorksheet->setCellValue('N'.$fila, $bien->estado_conservacion);
-    $activeWorksheet->setCellValue('O'.$fila, $bien->observaciones);
-    $activeWorksheet->setCellValue('P'.$fila, $bien->fecha_registro);
-    $activeWorksheet->setCellValue('Q'.$fila, $bien->usuario_registrante);
+    $activeWorksheet->setCellValue('B'.$fila, $usuario->dni);
+    $activeWorksheet->setCellValue('C'.$fila, $usuario->nombres_apellidos);
+    $activeWorksheet->setCellValue('D'.$fila, $usuario->correo);
+    $activeWorksheet->setCellValue('E'.$fila, $usuario->telefono);
+    $activeWorksheet->setCellValue('F'.$fila, $usuario->fecha_registro);
     $contador++;
     $fila++;
 }
-foreach (range('A', 'Q') as $col) {
+foreach (range('A', 'F') as $col) {
     $activeWorksheet->getColumnDimension($col)->setAutoSize(true);
 }
 
 
 ob_clean();
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment;filename="Bienes.xlsx"');
+header('Content-Disposition: attachment;filename="Usuarios.xlsx"');
 header('Cache-Control: max-age=0');
 
 $writer = new Xlsx($spreadsheet);

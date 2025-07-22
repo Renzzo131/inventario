@@ -11,7 +11,7 @@ class UsuarioModel
         $this->conexion = $this->conexion->connect();
     }
 
-    // ✅ Actualizado: incluye campo 'password'
+    // Actualizado: incluye campo 'password'
     public function registrarUsuario($dni, $apellidos_nombres, $correo, $telefono, $password)
     {
         $sql = $this->conexion->query("INSERT INTO usuarios (dni, nombres_apellidos, correo, telefono, password) 
@@ -45,6 +45,22 @@ class UsuarioModel
     public function nuevoPassword($id, $password) {
     $sql = $this->conexion->query("UPDATE usuarios SET password='$password', reset_password=0, token_password='' WHERE id='$id'");
     return $sql;
+}
+
+
+public function obtenerTodosLosUsuarios()
+{
+    $arrRespuesta = array();
+    $sql = $this->conexion->query("
+        SELECT *
+        FROM usuarios
+    ");
+
+    while ($objeto = $sql->fetch_object()) {
+        array_push($arrRespuesta, $objeto);
+    }
+
+    return $arrRespuesta;
 }
 
 
