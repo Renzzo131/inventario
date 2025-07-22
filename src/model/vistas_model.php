@@ -4,7 +4,7 @@ class vistaModelo
     protected static function obtener_vista($vista)
     {
 
-        $palabras_permitidas_n1 = ['inicio', 'reporte-usuarios', 'imprimir-movimiento', 'usuarios', 'nuevo-usuario', 'instituciones', 'nueva-institucion', 'ambientes', 'nuevo-ambiente', 'bienes',  'nuevo-bien', 'movimientos', 'nuevo-movimiento','reporte-bienes'];
+        $palabras_permitidas_n1 = ['inicio', 'reporte-usuarios', 'reporte-ambientes', 'imprimir-movimiento', 'usuarios', 'nuevo-usuario', 'instituciones', 'nueva-institucion', 'ambientes', 'nuevo-ambiente', 'bienes',  'nuevo-bien', 'movimientos', 'nuevo-movimiento','reporte-bienes'];
 
         if (in_array($vista, $palabras_permitidas_n1)) {
 

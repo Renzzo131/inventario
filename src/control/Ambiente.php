@@ -13,8 +13,8 @@ $objAdmin = new AdminModel();
 $objInstitucion = new InstitucionModel();
 
 //variables de sesion
-$id_sesion = $_POST['sesion'];
-$token = $_POST['token'];
+$id_sesion = $_REQUEST['sesion'];
+$token = $_REQUEST['token'];
 
 if ($tipo == "listar") {
     $arr_Respuesta = array('status' => false, 'msg' => 'Error_Sesion');
@@ -162,5 +162,21 @@ if ($tipo == "datos_registro") {
         $arr_Respuesta['status'] = true;
         $arr_Respuesta['msg'] = "Datos encontrados";
     }
+    echo json_encode($arr_Respuesta);
+}
+
+
+if ($tipo == "buscar_ambientes") {
+    $arr_Respuesta = array('status' => false, 'msg' => 'Error_sesion');
+
+    if ($objSesion->verificar_sesion_si_activa($id_sesion, $token)) {
+
+        $ambientes = $objAmbiente->obtenerTodosLosAmbientes();
+
+        $arr_Respuesta['status'] = true;
+        $arr_Respuesta['msg'] = 'correcto';
+        $arr_Respuesta['ambientes'] = $ambientes;
+    }
+
     echo json_encode($arr_Respuesta);
 }

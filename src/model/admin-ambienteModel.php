@@ -32,6 +32,26 @@ class AmbienteModel
         return $sql;
     }
 
+
+public function obtenerTodosLosAmbientes()
+{
+    $arrRespuesta = array();
+
+    $sql = $this->conexion->query("
+        SELECT ai.id, ai.id_ies, ai.encargado, ai.codigo, ai.detalle, ai.otros_detalle, i.nombre AS nombre_institucion
+        FROM ambientes_institucion ai
+        INNER JOIN institucion i ON ai.id_ies = i.id
+    ");
+
+    while ($objeto = $sql->fetch_object()) {
+        array_push($arrRespuesta, $objeto);
+    }
+
+    return $arrRespuesta;
+}
+
+
+
     public function buscarUsuarioByNom($nomap)
     {
         $sql = $this->conexion->query("SELECT * FROM ambientes_institucion WHERE apellidos_nombres='$nomap'");
