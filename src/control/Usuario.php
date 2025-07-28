@@ -166,15 +166,15 @@ if ($tipo == "send_email_password") {
         //Server settings
         $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
         $mail->isSMTP();                                            //Send using SMTP
-        $mail->Host       = 'inventario.renzo.serviciosvirtuales.com.pe';                     //Set the SMTP server to send through
+        $mail->Host       = 'mail.serviciosvirtuales.com.pe';                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $mail->Username   = '	rencitobonito@inventario.renzo.serviciosvirtuales.com.pe';                     //SMTP username
-        $mail->Password   = 'ReyRenzo131#';                               //SMTP password
+        $mail->Username   = 'renzo_2002@serviciosvirtuales.com.pe';                     //SMTP username
+        $mail->Password   = 'ReyRenzo131#';                              //SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
-        $mail->setFrom('renzo_1304@programacion2024.com', 'Cambio de contraseña - TB');
+        $mail->setFrom('renzo_2002@serviciosvirtuales.com.pe', 'Cambio de contraseña - TB');
         $mail->addAddress($datos_usuario->correo, $datos_usuario->nombres_apellidos);     //Add a recipient
         /*$mail->addAddress('ellen@example.com');               //Name is optional
     $mail->addReplyTo('info@example.com', 'Information');
@@ -319,7 +319,7 @@ if ($tipo == "send_email_password") {
         Te saludamos cordialmente desde el Instituto de Educación Superior Tecnológico Público Huanta. Hemos recibido una solicitud para cambiar la contraseña de tu cuenta en nuestro sistema académico.
       </p>
       <div class="alert-box">
-        <p>🔒 Por tu seguridad, este enlace expirará en 24 horas</p>
+        <p>Por tu seguridad, este enlace expirará en 24 horas</p>
       </div>
       <p>
         Si solicitaste este cambio, haz clic en el botón de abajo para crear tu nueva contraseña. Si no realizaste esta solicitud, puedes ignorar este correo de forma segura.
@@ -399,15 +399,15 @@ if ($tipo == "generar_nuevo_link_password") {
         //Server settings
         $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
         $mail->isSMTP();                                            //Send using SMTP
-        $mail->Host       = 'inventario.renzo.serviciosvirtuales.com.pe';                     //Set the SMTP server to send through
+        $mail->Host       = 'mail.serviciosvirtuales.com.pe';                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $mail->Username   = '	rencitobonito@inventario.renzo.serviciosvirtuales.com.pe';                     //SMTP username
+        $mail->Username   = 'renzo_2002@serviciosvirtuales.com.pe';                     //SMTP username
         $mail->Password   = 'ReyRenzo131#';                               //SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
-        $mail->setFrom('renzo_1304@programacion2024.com', 'Cambio de contraseña - TB');
+        $mail->setFrom('renzo_2002@serviciosvirtuales.com.pe', 'Cambio de contraseña - TB');
         $mail->addAddress($datos_usuario->correo, $datos_usuario->nombres_apellidos);     //Add a recipient
         /*$mail->addAddress('ellen@example.com');               //Name is optional
     $mail->addReplyTo('info@example.com', 'Information');
