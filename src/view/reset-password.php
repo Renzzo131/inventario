@@ -5,49 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(135deg,rgb(56, 71, 183),rgb(180, 180, 180));
-      color: #fff;
-    }
-
-    .login-container {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      padding: 40px 30px;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-      text-align: center;
-      width: 300px;
-    }
-
-    .login-container h1 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      color: #fff;
-    }
-
-    .login-container input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 5px;
-      outline: none;
-      font-size: 1rem;
-    }
-
-    .login-container input[type="email"],
-    .login-container input[type="password"] {
-      background: rgba(255, 255, 255, 0.8);
-      color: #333;
-    }
 
     .login-container input::placeholder {
       color: #888;
@@ -57,7 +14,7 @@
       width: 100%;
       padding: 10px;
       margin-top: 20px;
-      background:rgb(72, 32, 214);
+      background: #384759;
       border: none;
       border-radius: 5px;
       color: #fff;
@@ -67,13 +24,15 @@
     }
 
     .login-container button:hover {
-      background: #88d3ce;
+      background: #384759;
     }
+
+
 
     .login-container a {
       display: block;
       margin-top: 15px;
-      color: #fff;
+      color: #49538C;
       text-decoration: none;
       font-size: 0.9rem;
     }
