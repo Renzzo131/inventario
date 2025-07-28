@@ -26,6 +26,10 @@
       text-align: center;
       width: 300px;
     }
+    .login-container img {
+      margin:-10px 0px;
+      color: #fff;
+    }
 
     .login-container h1 {
       font-size: 2rem;
@@ -99,7 +103,7 @@
     <input type="hidden" id="data2" value="<?php echo urldecode($_GET['data2']);?>">
   <div class="login-container">
     <h1>Actualizar contraseña</h1>
-    <img src="https://sispa.iestphuanta.edu.pe/img/logo.png" alt="" width="100%">
+    <img src="./src/view/pp/assets/images/logo_insti.png" alt="" width="100%">
     <h4>Sistema de Control de Inventario</h4>
     <form id="frm_reset_password">
       <input type="password" name="password" id="password" placeholder="Nueva contraseña" required>
