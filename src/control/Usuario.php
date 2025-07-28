@@ -552,7 +552,7 @@ if ($tipo == "generar_nuevo_link_password") {
         Te enviamos este nuevo enlace para tu cambio de contraseña.
       </p>
       <div class="alert-box">
-        <p>🔒 Por tu seguridad, este enlace expirará en 24 horas</p>
+        <p> Por tu seguridad, este enlace expirará en 24 horas</p>
       </div>
       <p>
         Si solicitaste este cambio, haz clic en el botón de abajo para crear tu nueva contraseña. Si no realizaste esta solicitud, puedes ignorar este correo de forma segura.

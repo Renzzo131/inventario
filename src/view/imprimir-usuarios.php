@@ -2,7 +2,7 @@
 
     $curl = curl_init(); //inicia la sesión cURL
     curl_setopt_array($curl, array(
-        CURLOPT_URL => BASE_URL_SERVER."src/control/Bien.php?tipo=buscar_bienes&sesion=".$_SESSION['sesion_id']."&token=".$_SESSION['sesion_token'], //url a la que se conecta
+        CURLOPT_URL => BASE_URL_SERVER."src/control/Usuario.php?tipo=buscar_usuarios&sesion=".$_SESSION['sesion_id']."&token=".$_SESSION['sesion_token'], //url a la que se conecta
         CURLOPT_RETURNTRANSFER => true, //devuelve el resultado como una cadena del tipo curl_exec
         CURLOPT_FOLLOWLOCATION => true, //sigue el encabezado que le envíe el servidor
         CURLOPT_ENCODING => "", // permite decodificar la respuesta y puede ser"identity", "deflate", y "gzip", si está vacío recibe todos los disponibles.
@@ -36,7 +36,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Inventario general de bienes patrimoniales</title>
+  <title>Registro general de usuarios</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -93,67 +93,45 @@
   </style>
 </head>
 <body>
-  <h2><i>Inventario general de bienes patrimoniales</i></h2>
+  <h2><i>LISTADO GENERAL DE USUARIOS DEL SISTEMA</i></h2>
 <br><br>
   <p>ENTIDAD <span class="subrayado">: DIRECCION REGIONAL DE EDUCACION - AYACUCHO</span></p>
   <p>ÁREA <span class="subrayado">: OFICINA DE ADMINISTRACIÓN</span></p>
-  <p>INFORME <span class="subrayado">:  Relación General de Bienes Patrimoniales</span></p>
+  <p>INFORME <span class="subrayado">:  Relación de Usuarios Registrados</span></p>
 
-  <p class="motivo">DESCRIPCIÓN: <span class="subrayado"> Listado consolidado de bienes registrados en el sistema institucional de inventario.</span></p>
+  <p class="motivo">DESCRIPCIÓN: <span class="subrayado"> Listado consolidado de usuarios del sistema institucional.</span></p>
 
   <table style="width: 100%; border-collapse: collapse; margin-top: 20px;" cellspacing="0" cellpadding="4">
     <thead>
       <tr>
         <th style="border: 0.3px solid #444; background-color: #f2f2f2;">ITEM</th>
-        <th style="border: 0.3px solid #444; background-color: #f2f2f2;">DESCRIPCION (INGRESO)</th>
-        <th style="border: 0.3px solid #444; background-color: #f2f2f2;">AMBIENTE</th>
-        <th style="border: 0.3px solid #444; background-color: #f2f2f2;">CÓDIGO PATRIMONIAL</th>
-        <th style="border: 0.3px solid #444; background-color: #f2f2f2;">NOMBRE DEL BIEN</th>
-        <th style="border: 0.3px solid #444; background-color: #f2f2f2;">MARCA</th>
-        <th style="border: 0.3px solid #444; background-color: #f2f2f2;">MODELO</th>
-        <th style="border: 0.3px solid #444; background-color: #f2f2f2;">TIPO</th>
-        <th style="border: 0.3px solid #444; background-color: #f2f2f2;">COLOR</th>
-        <th style="border: 0.3px solid #444; background-color: #f2f2f2;">SERIE</th>
-        <th style="border: 0.3px solid #444; background-color: #f2f2f2;">DIMENSIONES</th>
-        <th style="border: 0.3px solid #444; background-color: #f2f2f2;">VALOR</th>
-        <th style="border: 0.3px solid #444; background-color: #f2f2f2;">SITUACION</th>
-        <th style="border: 0.3px solid #444; background-color: #f2f2f2;">ESTADO DE CONSERVACION</th>
-        <th style="border: 0.3px solid #444; background-color: #f2f2f2;">OBSERVACIONES</th>
+        <th style="border: 0.3px solid #444; background-color: #f2f2f2;">DNI</th>
+        <th style="border: 0.3px solid #444; background-color: #f2f2f2;">NOMBRES Y APELLIDOS</th>
+        <th style="border: 0.3px solid #444; background-color: #f2f2f2;">CORREO ELECTRÓNICO</th>
+        <th style="border: 0.3px solid #444; background-color: #f2f2f2;">TELÉFONO</th>
         <th style="border: 0.3px solid #444; background-color: #f2f2f2;">FECHA DE REGISTRO</th>
-        <th style="border: 0.3px solid #444; background-color: #f2f2f2;">USURARIO REGISTRANTE</th>
       </tr>
     </thead>
     <tbody>
         
         ';
-     if (empty($respuesta->bienes)) {
+     if (empty($respuesta->usuarios)) {
       $contenido_pdf .= '<tr>
       <td colspan = "7" style="text-align: center; border: 0.3px solid #444; font-size: 12.5px; font-weight: 300; ">
-      No se encontraron bienes registrados para este movimiento
+      No se encontraron usuarios registrados.
       </td>
       </tr>
       ';
      } else {
         $contador = 1;
-foreach ($respuesta->bienes as $bien) {
+foreach ($respuesta->usuarios as $usuario) {
     $contenido_pdf .= '<tr>';
     $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$contador.'</td>';
-    $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$bien->ingreso_detalle.'</td>';
-    $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$bien->ambiente_detalle.'</td>';
-    $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$bien->cod_patrimonial.'</td>';
-    $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$bien->denominacion.'</td>';
-    $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$bien->marca.'</td>';
-    $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$bien->modelo.'</td>';
-    $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$bien->tipo.'</td>';
-    $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$bien->color.'</td>';
-    $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$bien->serie.'</td>';
-    $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$bien->dimensiones.'</td>';
-    $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$bien->valor.'</td>';
-    $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$bien->situacion.'</td>';
-    $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$bien->estado_conservacion.'</td>';
-    $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$bien->observaciones.'</td>';
-    $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$bien->fecha_registro.'</td>';
-    $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$bien->usuario_registrante.'</td>';
+    $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$usuario->dni.'</td>';
+    $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$usuario->nombres_apellidos.'</td>';
+    $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$usuario->correo.'</td>';
+    $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$usuario->telefono.'</td>';
+    $contenido_pdf .= '<td style="border: 0.3px solid #444;">'.$usuario->fecha_registro.'</td>';
     $contenido_pdf .= '</tr>';
     $contador++;
 }
@@ -212,8 +190,8 @@ $contenido_pdf .= '
 class MYPDF extends TCPDF {
     public function Header() {
 
-        $this->Image('./src/view/pp/assets/images/gobierno_logo.jpg', 20, 10, 28, '', 'JPG', '', 'T', false, 150); // logo izquierdo
-        $this->Image('./src/view/pp/assets/images/drea_logo.jpg', 250, 10, 28, '', 'JPG', '', 'T', false, 150); // logo derecho
+        $this->Image('./src/view/pp/assets/images/gobierno_logo.jpg', 15, 10, 28, '', 'JPG', '', 'T', false, 150); // logo izquierdo
+        $this->Image('./src/view/pp/assets/images/drea_logo.jpg', 165, 10, 28, '', 'JPG', '', 'T', false, 150); // logo derecho
 
         $this->SetY(10);
         $this->SetFont('helvetica', 'B', 10);
@@ -247,19 +225,18 @@ $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
 $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 
 //Va por secciones si quieres utilizar distintas fuentes(tipo de fuente, grosor, tamaño de la letra)
-$pdf->SetFont('courier', '', 7);
+$pdf->SetFont('courier', '', 9);
 $pdf->SetAutoPageBreak(true, 20); // activa salto de página con 20 de margen inferior
 $pdf->SetMargins(10, 40, 10); // (izquierda, arriba, derecha)
  // margen para el footer
 
 // add a page
-$pdf->AddPage('L');
+$pdf->AddPage('P');
 
 // output the HTML content
 $pdf->writeHTML($contenido_pdf);
 
 //Close and output PDF document
-$pdf->Output('inventario de bienes.pdf', 'I');
+$pdf->Output('Registro de usuarios.pdf', 'I');
 
     }
-    
