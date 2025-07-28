@@ -30,7 +30,11 @@
     .login-container h1 {
       font-size: 2rem;
       margin-bottom: 20px;
-      color: #fff;
+      color: #384759;
+    }
+
+    .login-container h4 {
+      color: #384759;
     }
 
     .login-container input {
@@ -73,7 +77,7 @@
     .login-container a {
       display: block;
       margin-top: 15px;
-      color: #fff;
+      color: #384759;
       text-decoration: none;
       font-size: 0.9rem;
     }
