@@ -39,7 +39,7 @@ $activeWorksheet = $spreadsheet->getActiveSheet();
 $activeWorksheet->setTitle("hoja 1");
 
 $fila = 1;
-$headers = ['N°','Beneficiario', 'Código modular', 'RUC', 'Nombre'];
+$headers = ['N°','Beneficiario', 'Código modular', 'RUC', 'Denominación'];
 
 $colIndex = 'A';
 foreach ($headers as $header) {
