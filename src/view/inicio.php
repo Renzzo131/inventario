@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div class="card text-center">
-                    <a href="" class="btn btn-primary waves-effect waves-light">Ver</a>
+                    <a href="<?php echo BASE_URL; ?>usuarios" class="btn btn-primary waves-effect waves-light">Ver</a>
                 </div>
             </div>
             <!--end card body-->
@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="card text-center">
-                    <a href="" class="btn btn-primary waves-effect waves-light">Ver</a>
+                    <a href="<?php echo BASE_URL; ?>instituciones" class="btn btn-primary waves-effect waves-light">Ver</a>
                 </div>
             </div>
             <!--end card body-->
@@ -57,7 +57,7 @@
                     </div>
                 </div>
                 <div class="card text-center">
-                    <a href="" class="btn btn-primary waves-effect waves-light">Ver</a>
+                    <a href="<?php echo BASE_URL; ?>ambientes" class="btn btn-primary waves-effect waves-light">Ver</a>
                 </div>
             </div>
             <!--end card body-->
@@ -78,7 +78,7 @@
                     </div>
                 </div>
                 <div class="card text-center">
-                    <a href="" class="btn btn-primary waves-effect waves-light">Ver</a>
+                    <a href="<?php echo BASE_URL; ?>bienes" class="btn btn-primary waves-effect waves-light">Ver</a>
                 </div>
             </div>
             <!--end card body-->
@@ -99,7 +99,7 @@
                     </div>
                 </div>
                 <div class="card text-center">
-                    <a href="" class="btn btn-primary waves-effect waves-light">Ver</a>
+                    <a href="<?php echo BASE_URL; ?>movimientos" class="btn btn-primary waves-effect waves-light">Ver</a>
                 </div>
             </div>
             <!--end card body-->
