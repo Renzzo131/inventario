@@ -13,12 +13,12 @@
       align-items: center;
       min-height: 100vh;
       font-family: 'Arial', sans-serif;
-      background: linear-gradient(135deg, #6e45e2, #88d3ce);
+      background: linear-gradient(135deg, #F2F2F2, #F2F2F2);
       color: #fff;
     }
 
     .login-container {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(31, 31, 31, 0.03);
       backdrop-filter: blur(10px);
       padding: 40px 30px;
       border-radius: 15px;
@@ -27,14 +27,22 @@
       width: 300px;
     }
 
-    .login-container h1 {
-      font-size: 2rem;
-      margin-bottom: 20px;
+    .login-container img {
+      margin:-10px 0px;
       color: #fff;
     }
 
+    .login-container h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #384759;
+    }
+        .login-container h4 {
+      color: #384759;
+    }
+
     .login-container input {
-      width: 100%;
+            width: calc(100% - 20px);
       padding: 10px;
       margin: 10px 0;
       border: none;
@@ -43,7 +51,7 @@
       font-size: 1rem;
     }
 
-    .login-container input[type="email"],
+    .login-container input[type="text"],
     .login-container input[type="password"] {
       background: rgba(255, 255, 255, 0.8);
       color: #333;
@@ -57,7 +65,7 @@
       width: 100%;
       padding: 10px;
       margin-top: 20px;
-      background: #6e45e2;
+      background: #384759;
       border: none;
       border-radius: 5px;
       color: #fff;
@@ -67,13 +75,15 @@
     }
 
     .login-container button:hover {
-      background: #88d3ce;
+      background: #384759;
     }
+
+
 
     .login-container a {
       display: block;
       margin-top: 15px;
-      color: #fff;
+      color: #49538C;
       text-decoration: none;
       font-size: 0.9rem;
     }
@@ -93,7 +103,7 @@
 <body>
   <div class="login-container">
     <h1>Iniciar Sesión</h1>
-    <img src="https://sispa.iestphuanta.edu.pe/img/logo.png" alt="" width="100%">
+    <img src="./src/view/pp/assets/images/logo_insti.png" alt="" width="70%">
     <h4>Sistema de Control de Inventario</h4>
     <form id="frm_login">
       <input type="text" name="dni" id="dni" placeholder="DNI" required>
