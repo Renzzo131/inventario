@@ -93,7 +93,7 @@
   </style>
 </head>
 <body>
-  <h2><i>LISTADO GENERAL DE MOVIMIENTOS REGISTRADAS</i></h2>
+  <h2><i>LISTADO GENERAL DE MOVIMIENTOS REGISTRADOS</i></h2>
 <br><br>
   <p>ENTIDAD <span class="subrayado">: DIRECCION REGIONAL DE EDUCACION - AYACUCHO</span></p>
   <p>ÁREA <span class="subrayado">: OFICINA DE ADMINISTRACIÓN</span></p>
