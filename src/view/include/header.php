@@ -211,6 +211,53 @@
     transform: translateY(0);
 }
 
+.btn-light {
+    background: linear-gradient(135deg, #f7f7f7, #e9e9e9);
+    border: none;
+    color: #333;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: none;
+    letter-spacing: 0.3px;
+    box-shadow: 
+        0 2px 8px rgba(150, 150, 150, 0.15),
+        0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.btn-light::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.05), transparent);
+    transition: left 0.8s ease;
+}
+
+.btn-light:hover {
+    background: linear-gradient(135deg, #ffffff, #f2f2f2);
+    transform: translateY(-1px);
+    box-shadow: 
+        0 4px 16px rgba(200, 200, 200, 0.25),
+        0 2px 8px rgba(0, 0, 0, 0.1);
+    color: #111;
+}
+
+.btn-light:hover::before {
+    left: 100%;
+}
+
+.btn-light:active {
+    transform: translateY(0);
+}
+
 
     </style>
     <script>
