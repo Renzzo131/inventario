@@ -26,6 +26,193 @@
     <link href="<?php echo BASE_URL ?>src/view/pp/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo BASE_URL ?>src/view/pp/assets/css/theme.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo BASE_URL ?>src/view/include/styles.css" rel="stylesheet" type="text/css" />
+    <style>
+        .btn-primary {
+            background: linear-gradient(135deg, #49538C, #5a6394);
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 6px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: none;
+            letter-spacing: 0.3px;
+            box-shadow: 
+                0 2px 8px rgba(73, 83, 140, 0.25),
+                0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transition: left 0.8s ease;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #88d3ce, #9bddd9);
+            transform: translateY(-1px);
+            box-shadow: 
+                0 4px 16px rgba(136, 211, 206, 0.3),
+                0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-info {
+    background: linear-gradient(135deg, #2c8c85, #3ca79f);
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: none;
+    letter-spacing: 0.3px;
+    box-shadow: 
+        0 2px 8px rgba(44, 140, 133, 0.25),
+        0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-info::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    transition: left 0.8s ease;
+}
+
+.btn-info:hover {
+    background: linear-gradient(135deg, #70e1c8, #91f2dc);
+    transform: translateY(-1px);
+    box-shadow: 
+        0 4px 16px rgba(112, 225, 200, 0.3),
+        0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-info:hover::before {
+    left: 100%;
+}
+
+.btn-info:active {
+    transform: translateY(0);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #2e7d32, #388e3c);
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: none;
+    letter-spacing: 0.3px;
+    box-shadow: 
+        0 2px 8px rgba(46, 125, 50, 0.25),
+        0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-success::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    transition: left 0.8s ease;
+}
+
+.btn-success:hover {
+    background: linear-gradient(135deg, #66bb6a, #81c784);
+    transform: translateY(-1px);
+    box-shadow: 
+        0 4px 16px rgba(102, 187, 106, 0.3),
+        0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-success:hover::before {
+    left: 100%;
+}
+
+.btn-success:active {
+    transform: translateY(0);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #c62828, #d32f2f);
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: none;
+    letter-spacing: 0.3px;
+    box-shadow: 
+        0 2px 8px rgba(211, 47, 47, 0.25),
+        0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-danger::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    transition: left 0.8s ease;
+}
+
+.btn-danger:hover {
+    background: linear-gradient(135deg, #e57373, #ef9a9a);
+    transform: translateY(-1px);
+    box-shadow: 
+        0 4px 16px rgba(229, 115, 115, 0.3),
+        0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-danger:hover::before {
+    left: 100%;
+}
+
+.btn-danger:active {
+    transform: translateY(0);
+}
+
+
+    </style>
     <script>
         const base_url = '<?php echo BASE_URL; ?>';
         const base_url_server = '<?php echo BASE_URL_SERVER; ?>';
@@ -48,7 +235,7 @@
                     <!-- LOGO -->
                     <div class="navbar-brand-box d-flex align-items-left">
                         <a href="<?php echo BASE_URL ?>" class="logo">
-                            <i class="mdi mdi-album"></i>
+                            <i class="fas fa-clipboard-list"></i>
                             <span>
                                 SISTEMA DE GESTION DE INVENTARIO
                             </span>
@@ -108,7 +295,7 @@
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-components" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="mdi mdi-diamond-stone"></i>Gestión <div class="arrow-down"></div>
+                                        <i class="mdi mdi-cogs"></i>Gestión <div class="arrow-down"></div>
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="topnav-components">
                                         <a href="<?php echo BASE_URL ?>usuarios" class="dropdown-item">Usuarios</a>
