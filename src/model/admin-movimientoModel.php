@@ -31,6 +31,36 @@ class MovimientoModel
         return $sql;
     }
 
+    public function obtenerTodosLosMovimientos()
+{
+    $arrRespuesta = array();
+
+    $sql = $this->conexion->query("
+        SELECT 
+            m.id,
+            ao.detalle AS ambiente_origen,
+            ad.detalle AS ambiente_destino,
+            u.nombres_apellidos AS registrante,
+            m.fecha_registro AS fecha,
+            m.descripcion,
+            i.nombre AS institucion
+        FROM movimientos m
+        LEFT JOIN ambientes_institucion ao ON m.id_ambiente_origen = ao.id
+        LEFT JOIN ambientes_institucion ad ON m.id_ambiente_destino = ad.id
+        LEFT JOIN usuarios u ON m.id_usuario_registro = u.id
+        LEFT JOIN institucion i ON m.id_ies = i.id
+        ORDER BY m.id ASC
+    ");
+
+    while ($objeto = $sql->fetch_object()) {
+        array_push($arrRespuesta, $objeto);
+    }
+
+    return $arrRespuesta;
+}
+
+
+
     public function buscarMovimientoById($id)
     {
         $sql = $this->conexion->query("SELECT * FROM movimientos WHERE id='$id'");

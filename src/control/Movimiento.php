@@ -242,3 +242,18 @@ if ($tipo == "buscar_movimiento_id") {
         }
         echo json_encode($arr_Respuesta);
 }
+
+if ($tipo == "buscar_movimientos") {
+    $arr_Respuesta = array('status' => false, 'msg' => 'Error_sesion');
+
+    if ($objSesion->verificar_sesion_si_activa($id_sesion, $token)) {
+
+        $movimientos = $objMovimiento->obtenerTodosLosMovimientos();
+
+        $arr_Respuesta['status'] = true;
+        $arr_Respuesta['msg'] = 'correcto';
+        $arr_Respuesta['movimientos'] = $movimientos;
+    }
+
+    echo json_encode($arr_Respuesta);
+}
