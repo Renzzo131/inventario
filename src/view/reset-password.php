@@ -103,7 +103,7 @@
     <input type="hidden" id="data2" value="<?php echo urldecode($_GET['data2']);?>">
   <div class="login-container">
     <h1>Actualizar contraseña</h1>
-    <img src="./src/view/pp/assets/images/logo_insti.png" alt="logo IESTP" width="100%">
+    <img src="./src/view/pp/assets/images/logo_insti.png" alt="LOGO IESTPHUANTA" width="70%">
     <h4>Sistema de Control de Inventario</h4>
     <form id="frm_reset_password">
       <input type="password" name="password" id="password" placeholder="Nueva contraseña" required>
