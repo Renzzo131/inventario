@@ -75,7 +75,7 @@
     }
 
     .login-container button:hover {
-      background: #384759;
+      background: #88d3ce;
     }
 
 
