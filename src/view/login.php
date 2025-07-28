@@ -103,7 +103,7 @@
 <body>
   <div class="login-container">
     <h1>Iniciar Sesión</h1>
-    <img src="./src/view/pp/assets/images/logo_insti.png" alt="" width="70%">
+    <img src="<?php echo BASE_URL ?>src/view/pp/assets/images/logo_insti.png" alt="LOGO IESTPHUANTA" width="70%">
     <h4>Sistema de Control de Inventario</h4>
     <form id="frm_login">
       <input type="text" name="dni" id="dni" placeholder="DNI" required>
