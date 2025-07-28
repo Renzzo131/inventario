@@ -91,7 +91,7 @@
     }
   </style>
   <!-- Sweet Alerts css -->
-  <link href="<?php echo BASE_URL ?>view/pp/plugins/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+  <link href="<?php echo BASE_URL ?>src/view/pp/plugins/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
   <script>
     const base_url = '<?php echo BASE_URL; ?>';
     const base_url_server = '<?php echo BASE_URL_SERVER; ?>';
@@ -103,7 +103,7 @@
     <input type="hidden" id="data2" value="<?php echo urldecode($_GET['data2']);?>">
   <div class="login-container">
     <h1>Actualizar contraseña</h1>
-    <img src="<?= BASE_URL ?>src/view/pp/assets/images/logo_insti.pngsrc/view/pp/assets/images/logo_insti.png" alt="LOGO IESTPHUANTA" width="70%">
+    <img src="<?php echo BASE_URL ?>src/view/pp/assets/images/logo_insti.png" alt="LOGO IESTPHUANTA" width="70%">
     <h4>Sistema de Control de Inventario</h4>
     <form id="frm_reset_password">
       <input type="password" name="password" id="password" placeholder="Nueva contraseña" required>
